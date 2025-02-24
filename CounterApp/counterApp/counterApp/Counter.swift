@@ -1,11 +1,11 @@
 import Foundation
 
-class Counter {
-    var lowerBound: Int
-    var upperBound: Int
-    var step: Int
-    var ops: Int
-    var value: Int
+class Counter: ObservableObject {
+    @Published var lowerBound: Int
+    @Published var upperBound: Int
+    @Published var step: Int
+    @Published var ops: Int
+    @Published var value: Int
     
     init(lowerBound: Int = 0, upperBound: Int = 5, step: Int = 1) {
         self.lowerBound = lowerBound
