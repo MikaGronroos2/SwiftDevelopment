@@ -30,11 +30,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E4F70D882D71D716008FD70E /* SwiftDatabasePractice */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SwiftDatabasePractice;
-			sourceTree = "<group>";
-		};
 		E4F70D992D71D717008FD70E /* SwiftDatabasePracticeTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SwiftDatabasePracticeTests;
@@ -43,6 +38,11 @@
 		E4F70DA32D71D717008FD70E /* SwiftDatabasePracticeUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SwiftDatabasePracticeUITests;
+			sourceTree = "<group>";
+		};
+		E4F70DC32D71D73F008FD70E /* SwiftDatabasePractice */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SwiftDatabasePractice;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +75,7 @@
 		E4F70D7D2D71D716008FD70E = {
 			isa = PBXGroup;
 			children = (
-				E4F70D882D71D716008FD70E /* SwiftDatabasePractice */,
+				E4F70DC32D71D73F008FD70E /* SwiftDatabasePractice */,
 				E4F70D992D71D717008FD70E /* SwiftDatabasePracticeTests */,
 				E4F70DA32D71D717008FD70E /* SwiftDatabasePracticeUITests */,
 				E4F70D872D71D716008FD70E /* Products */,
@@ -108,7 +108,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E4F70D882D71D716008FD70E /* SwiftDatabasePractice */,
+				E4F70DC32D71D73F008FD70E /* SwiftDatabasePractice */,
 			);
 			name = SwiftDatabasePractice;
 			packageProductDependencies = (
