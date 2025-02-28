@@ -7,12 +7,15 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+
+struct FilteredMovieList: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        MovieList()
     }
 }
 
+
 #Preview {
-    SwiftUIView()
+    FilteredMovieList()
+        .modelContainer(SampleData.shared.modelContainer)
 }
