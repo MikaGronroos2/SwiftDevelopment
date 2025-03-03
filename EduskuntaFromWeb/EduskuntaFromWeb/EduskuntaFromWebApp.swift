@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 @main
 struct EduskuntaFromWebApp: App {
@@ -13,5 +15,6 @@ struct EduskuntaFromWebApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Edustaja.self])
     }
 }

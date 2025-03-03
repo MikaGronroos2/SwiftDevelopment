@@ -1,21 +1,17 @@
 //
 //  ContentView.swift
-//  EduskuntaFromWeb
+//  Eduskunta
 //
-//  Created by Mika Grönroos on 3.3.2025.
+//  Created by Mika Grönroos on 28.2.2025.
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Eduskunta()
+            .modelContainer(for: [Edustaja.self])
     }
 }
 
