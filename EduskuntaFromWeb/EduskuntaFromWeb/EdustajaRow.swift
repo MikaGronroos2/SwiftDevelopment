@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct EdustajaRow: View {
+    @Binding var edustaja: Edustaja
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            VStack(alignment: .leading) {
+                Text("\(edustaja.first) \(edustaja.last)")
+                    .font(.headline)
+                Text("Seat Number: \(edustaja.seatNumber)")
+                    .font(.subheadline)
+            }
+            
+            Spacer()
+            
+            Image(systemName: edustaja.isFavorite ? "star.fill" : "star")
+                .font(.largeTitle)
+                .foregroundColor(edustaja.isFavorite ? .yellow : .gray)
+                .padding(15)
+                .onTapGesture {
+                    edustaja.isFavorite.toggle()
+                }
+        }
     }
 }
 
-#Preview {
-    EdustajaRow()
-}

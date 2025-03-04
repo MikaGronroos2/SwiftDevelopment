@@ -7,22 +7,23 @@
 import SwiftUI
 
 struct EdustajaListView: View {
-    var category: EdustajaCategory
+    @State private var category: EdustajaCategory 
+
+    init(category: EdustajaCategory) {
+        _category = State(initialValue: category)
+    }
 
     var body: some View {
-        List(category.members) { edustaja in
-            NavigationLink(destination: EdustajaDetail(edustaja: edustaja)) {
-                VStack(alignment: .leading) {
-                    Text("\(edustaja.first) \(edustaja.last)")
-                        .font(.headline)
-                    Text("Seat Number: \(edustaja.seatNumber)")
-                        .font(.subheadline)
-                }
+        List(category.members.indices, id: \.self) { index in
+            NavigationLink(destination: EdustajaDetail(edustaja: category.members[index])) {
+                EdustajaRow(edustaja: $category.members[index])
             }
         }
         .navigationTitle(category.name)
     }
 }
+
+
 
 #Preview {
 

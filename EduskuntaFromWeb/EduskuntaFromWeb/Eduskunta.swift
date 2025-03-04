@@ -5,20 +5,32 @@ struct Eduskunta: View {
     @Environment(\.modelContext) var modelContext
     @State private var categories: [EdustajaCategory] = []
     @Query var edustajat: [Edustaja]
+    @State private var selectedParties: Set<String> = []
+    @State private var majorityResult: String = ""
 
     var body: some View {
         NavigationView {
-            List($categories) { $category in
-                NavigationLink(destination: EdustajaListView(category: category)) {
-                    CategoryRow(category: $category)
+            VStack {
+                List($categories) { $category in
+                    NavigationLink(destination: EdustajaListView(category: category)) {
+                        CategoryRow(category: $category, selectedParties: $selectedParties)
+                    }
                 }
-            }
-            .navigationTitle("Edustajat by Puolueet")
-            .onAppear {
-                if edustajat.isEmpty {
-                    updateMPsFromNW(context: modelContext)
+                .navigationTitle("Edustajat by Puolueet")
+                .onAppear {
+                    if edustajat.isEmpty {
+                        updateMPsFromNW(context: modelContext)
+                    }
+                    categories = groupEdustajatByParty(edustajat)
                 }
-                categories = groupEdustajatByParty(edustajat)
+                
+                Button("Check Majority Government") {
+                    checkMajorityGovernment(edustajat: edustajat, selectedParties: selectedParties, majorityResult: &majorityResult)
+                }
+                .padding()
+                
+                Text(majorityResult)
+                    .padding()
             }
         }
     }
@@ -26,7 +38,7 @@ struct Eduskunta: View {
 
 func groupEdustajatByParty(_ edustajat: [Edustaja]) -> [EdustajaCategory] {
     let grouped = Dictionary(grouping: edustajat, by: { $0.party })
-    return grouped.map { EdustajaCategory(name: $0.key, members: $0.value) }
+    return grouped.map { EdustajaCategory(name: $0.key, members: $0.value) }.sorted { $0.name < $1.name }
 }
 
 func updateMPsFromNW(context: ModelContext) {
@@ -74,6 +86,18 @@ func deleteAllEdustajat(context: ModelContext) {
         try context.save()
     } catch {
         print("Error deleting data: \(error)")
+    }
+}
+
+func checkMajorityGovernment(edustajat: [Edustaja], selectedParties: Set<String>, majorityResult: inout String) {
+    let totalSeats = edustajat.count
+    let selectedMPs = edustajat.filter { selectedParties.contains($0.party) }.count
+    let majorityNeeded = totalSeats / 2 + 1
+
+    if selectedMPs >= majorityNeeded {
+        majorityResult = "✅ Majority Government Formed! (\(selectedMPs)/\(totalSeats))"
+    } else {
+        majorityResult = "❌ Not a Majority. (\(selectedMPs)/\(totalSeats))"
     }
 }
 
