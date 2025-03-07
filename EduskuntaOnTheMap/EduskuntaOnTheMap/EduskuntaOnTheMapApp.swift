@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 @main
-struct EduskuntaOnTheMapApp: App {
+struct EduskuntaOnTheApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Edustaja.self])
     }
 }
